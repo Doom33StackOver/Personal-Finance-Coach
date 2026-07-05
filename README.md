@@ -21,6 +21,7 @@ An intelligent multi-agent AI assistant built with Google Agent Development Kit 
 ### Prerequisites
 - Python 3.11+
 - `uv` package manager
+- Gemini API Key
 
 ### Setup
 
