@@ -8,6 +8,8 @@
 
 ### ADK Workflow Logic
 
+![Workflow Diagram](assets/workflow_diagram.png)
+
 ```mermaid
 flowchart TD
     %% Define styles
