@@ -6,6 +6,65 @@
 
 ![Architecture Diagram](assets/architecture_diagram.png)
 
+### ADK Workflow Logic
+
+```mermaid
+flowchart TD
+    %% Define styles
+    classDef startEnd fill:#1A1A1A,stroke:#666,stroke-width:2px,color:#FFF,stroke-dasharray: 5 5
+    classDef security fill:#800000,stroke:#FF4444,stroke-width:2px,color:#FFF
+    classDef orchestrator fill:#003366,stroke:#4488FF,stroke-width:2px,color:#FFF
+    classDef advisor fill:#004d00,stroke:#33CC33,stroke-width:2px,color:#FFF
+    classDef hitl fill:#CC8800,stroke:#FFCC00,stroke-width:2px,color:#FFF
+    classDef tool fill:#4B0082,stroke:#9932CC,stroke-width:2px,color:#FFF
+
+    START((START)):::startEnd
+
+    subgraph Workflow ["ADK Workflow"]
+        direction TD
+        
+        SecCheck{"Security Checkpoint"}:::security
+        SecError["Security Error Node<br/>(Access Denied)"]:::security
+        
+        Orch["Orchestrator<br/>(LlmAgent)"]:::orchestrator
+        
+        subgraph SubAgents ["Sub-Agents (Delegated)"]
+            direction LR
+            Budget["Budget Advisor"]:::advisor
+            Savings["Savings Advisor"]:::advisor
+        end
+        
+        Approval{"Needs Approval?"}:::hitl
+        GetHuman["Get Human Approval<br/>(RequestInput)"]:::hitl
+        
+        FastMCP[("FastMCP Server")]:::tool
+    end
+    
+    END((END)):::startEnd
+
+    %% Connections
+    START -->|User Input| SecCheck
+    
+    SecCheck -->|Injection/PII Detected| SecError
+    SecError --> END
+    
+    SecCheck -->|Clean Input| Orch
+    
+    Orch <-->|Delegates Task| Budget
+    Orch <-->|Delegates Task| Savings
+    
+    Budget -.->|Uses Tool: read_local_data| FastMCP
+    Savings -.->|Uses Tool: simulate_interest| FastMCP
+    Budget -.->|Signals BUDGET_PROPOSAL| Orch
+    
+    Orch -->|Response Generated| Approval
+    
+    Approval -->|Yes| GetHuman
+    Approval -->|No| END
+    
+    GetHuman -->|Approved/Rejected| Orch
+```
+
 The Personal Finance Coach uses a multi-agent hierarchical architecture built on the Google Agent Development Kit (ADK). 
 The entry point is a fast, graph-based `Workflow` that wraps the agent logic, providing state management, structured execution routing, and ambient UI integration.
 
