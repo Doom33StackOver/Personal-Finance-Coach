@@ -1,6 +1,11 @@
 # Personal Finance Coach - Submission Writeup
 
+![Cover Banner](assets/cover_page_banner.png)
+
 ## Architecture Overview
+
+![Architecture Diagram](assets/architecture_diagram.png)
+
 The Personal Finance Coach uses a multi-agent hierarchical architecture built on the Google Agent Development Kit (ADK). 
 The entry point is a fast, graph-based `Workflow` that wraps the agent logic, providing state management, structured execution routing, and ambient UI integration.
 

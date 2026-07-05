@@ -1,8 +1,12 @@
 # Personal Finance Coach 💸
 
+![Cover Banner](assets/cover_page_banner.png)
+
 An intelligent multi-agent AI assistant built with Google Agent Development Kit (ADK) to help you manage your finances, create budgets, and optimize your savings strategies.
 
 ## Features
+
+![Architecture Diagram](assets/architecture_diagram.png)
 
 - **Multi-Agent Architecture**: 
   - 🧠 **Orchestrator**: Routes user queries to specialized agents.
