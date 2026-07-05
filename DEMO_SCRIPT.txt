@@ -1,0 +1,63 @@
+Title: Personal Finance Coach Demo
+Presenter: [Your Name]
+Project: Personal Finance Coach (Built with Google ADK)
+Duration: ~3 minutes
+
+---
+
+[SLIDE 1: Title & Introduction]
+(Visual: Cover Page Banner)
+
+Presenter: 
+"Hello everyone! Managing personal finances can be overwhelming. We often need specialized advice for budgeting and separate expertise for investing and saving. Today, I'm excited to present the 'Personal Finance Coach'—an intelligent, multi-agent assistant built entirely on the Google Agent Development Kit (ADK)."
+
+---
+
+[SLIDE 2: Multi-Agent Architecture]
+(Visual: Architecture Diagram)
+
+Presenter: 
+"Our solution relies on a hierarchical multi-agent architecture. 
+At the center is our 'Orchestrator' agent. Its job is to understand your financial query and route it to the right specialist. 
+If you ask about creating a budget, it delegates to the 'Budget Advisor'. 
+If you ask about compounding interest or setting financial goals, it hands off to the 'Savings Advisor'.
+This ensures that the language model focuses its context purely on the task at hand, reducing hallucinations and improving the quality of financial advice."
+
+---
+
+[SLIDE 3: Security & Enterprise Readiness]
+(Visual: Code snippet of security_checkpoint node)
+
+Presenter: 
+"When dealing with financial data, security is paramount. 
+Before the LLM even sees the user's input, it passes through our ADK Workflow 'Security Checkpoint'. 
+This node automatically detects and blocks prompt injection attempts. It also scrubs Personally Identifiable Information—like Credit Card numbers and SSNs—redacting them before they reach the model. All of this is logged locally in an audit trail for compliance."
+
+---
+
+[SLIDE 4: Live Demo - FastMCP Integration]
+(Visual: Terminal / ADK Web Playground)
+
+Presenter:
+"Let's see it in action. [Type query: 'What is my current savings balance?']
+Here, the Savings Advisor needs real data. Using a locally hosted FastMCP server, we securely expose a tool that allows the agent to read your current savings data. The Model Context Protocol (MCP) bridges the gap between our agents and external data silos without sacrificing security."
+
+---
+
+[SLIDE 5: Live Demo - Human-In-The-Loop (HITL)]
+(Visual: ADK Web Playground - Budget Proposal)
+
+Presenter: 
+"Now, let's ask for a new budget. [Type query: 'I want to set up a budget, I earn $5000 a month']
+The Orchestrator routes this to the Budget Advisor, which generates a structured plan using the 50/30/20 rule. 
+But notice what happens next: The system pauses. 
+Because modifying financial plans is a sensitive action, we implemented a Human-in-the-Loop (HITL) process. The agent uses a custom tool to signal the ADK workflow to pause and request explicit user approval before finalizing the budget.
+[Click 'Proceed / Approve' in the UI]"
+
+---
+
+[SLIDE 6: Conclusion]
+(Visual: Summary slide)
+
+Presenter:
+"By combining the Google ADK's robust workflow routing, multi-agent delegation, and MCP tool integration, the Personal Finance Coach delivers secure, accurate, and highly specialized financial advice. Thank you!"
